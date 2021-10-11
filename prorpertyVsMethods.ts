@@ -1,8 +1,8 @@
 // Person.ts
 class Person{
 
-    private lName: string;
-    constructor (name : string){
+    public lName: string;
+    constructor ( name : string){
         this.lName = name;
     }
 }   
