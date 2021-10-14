@@ -5,14 +5,13 @@
     you can add the username and password in front of the hostname.
     var dbURI = 'mongodb://username:password@localhost/mydatabase';
     **/
-
+    const dbURI = 'mongodb://localhost:27017/test';
+    const dbOptions = { 'user': 'root', 'pass': 'root' };
 
     mongoose.connection
         .on('error', (err) => console.log('Mongoose connection error: ' + err))
-        .on('connected', () => console.log('Mongoose connected'));
-
-    const dbURI = 'mongodb://localhost:27017/test';
-    const dbOptions = { 'user': 'root', 'pass': 'root' };
+        .on('connected', () => console.log(`Mongoose connected on ${dbURI}`))
+        .on('disconnected', () => console.log('Mongoose disconnected'));
 
     mongoose
         .connect(dbURI)
@@ -55,6 +54,8 @@
     console.log(kittens);
     // If we want to filter our kittens by name, Mongoose supports MongoDBs rich querying syntax.
     await Kitten.find({ name: /^fluff/ });
+
+
 
     process.on('SIGINT', function () {
         mongoose.connection.close(function () {
