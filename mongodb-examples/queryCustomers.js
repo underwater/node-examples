@@ -10,9 +10,14 @@ MongoClient.connect(url, function(err, db) {
   dbo
   .collection("customers")
   .find(query, projection)
-  .toArray(function(err, result) {
-    if (err) throw err;
-    console.log(result);
-    db.close();
-  });
+  .toArray(logResult(db));
 });
+
+function logResult(db) {
+    return function (err, result) {
+        if (err)
+            throw err;
+        console.log(result);
+        db.close();
+    };
+}
