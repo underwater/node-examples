@@ -1,1 +1,1 @@
-docker pull bitnami/mongodb
+docker pull mongo

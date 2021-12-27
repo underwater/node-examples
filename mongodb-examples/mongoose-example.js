@@ -1,4 +1,4 @@
-(async function () {
+(async function() {
     const mongoose = require('mongoose');
 
     /*If you want to access the database as a particular user, 
@@ -26,10 +26,12 @@
 
     // add "speak" functionality to our documents:
     // NOTE: methods must be added to the schema before compiling it with mongoose.model()
+
+    // yes, can do, but avoid since doesn't belong to data layer (what if using microservice)
     kittySchema.methods.speak = function speak() {
-        const greeting = this.name
-            ? "Meow name is " + this.name
-            : "I don't have a name";
+        const greeting = this.name ?
+            "Meow name is " + this.name :
+            "I don't have a name";
         console.log(greeting);
     };
 
@@ -57,8 +59,8 @@
 
 
 
-    process.on('SIGINT', function () {
-        mongoose.connection.close(function () {
+    process.on('SIGINT', function() {
+        mongoose.connection.close(function() {
             console.log('Mongoose disconnected through app termination');
             process.exit(0);
         });
